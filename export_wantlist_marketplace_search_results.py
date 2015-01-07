@@ -5,6 +5,7 @@ import csv
 import urllib.request
 import json
 import time
+import sys
 
 parser = argparse.ArgumentParser(description='exports wantlist search results from Discogs Marketplace')
 parser.add_argument('wantlist', help='exported CSV wantlist file from Discogs')
@@ -52,3 +53,7 @@ with open(args.wantlist) as wantlist_file:
                     continue
                 else:
                     break
+
+            if max_tries == tries:
+                print("Failed to contact Discogs. Retry later or contact the developer.")
+                sys.exit(-1)
